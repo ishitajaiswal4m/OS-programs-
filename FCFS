@@ -1,0 +1,67 @@
+#include<stdio.h>
+#include<conio.h>
+void main()
+{
+ int n,p[20],a[20],b[20],i,j,temp1,temp2,temp3,t=0,t1=0;
+int sum,sum1,wt,tat,wts=0,sum2=0;
+ float awt,th;
+ clrscr();
+ printf("enter the no of processes:");
+ scanf("%d",&n);
+ printf("enter the process array");
+ for(i=0;i<n;i++)
+  scanf("%d",&p[i]);
+ printf("enter the arrival time array:");
+ for(i=0;i<n;i++)
+   scanf("%d",&a[i]);
+ printf("enter the burst time array:");
+ for(i=0;i<n;i++)
+    scanf("%d",&b[i]);
+//sorting arrival time array:
+for(i=0;i<n;i++)
+{
+  for(j=0;j<n-i-1;j++)
+  {
+    if(a[j]>a[j+1])
+    {
+     temp1=a[j];
+     a[j]=a[j+1];
+     a[j+1]=temp1;
+      temp2=p[j];
+     p[j]=p[j+1];
+     p[j+1]=temp2;
+      temp3=b[j];
+     b[j]=b[j+1];
+     b[j+1]=temp3;
+    }
+  }
+}
+sum=0;
+for(i=0;i<n;i++)
+{
+wt=sum-a[i];
+ sum=sum+b[i];
+  //since FCFS is an non preemptive algorithm so the waiting time and the response time are equal
+ printf("The waiting time & response time for process p[%d]=%d\n",i+1,wt);
+ wts=wts+wt;
+ }
+ awt=wts/n;
+ printf("The average waiting time is=%d\n",awt);
+ sum1=5;
+ for(i=0;i<n;i++)
+ {
+ tat= sum1-a[i] ;
+ sum1=sum1+b[i+1];
+  printf("The Turn Around Time for p[%d] = %d\n",i+1,tat);
+ }
+ //calculating throughput
+ for(i=0;i<n;i++)
+     sum2=sum2+b[i];
+ th=n/sum2;
+ printf("The throughput is=%d",th);
+ getch();
+ }
+
+
+
+
